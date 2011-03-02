@@ -375,7 +375,7 @@ namespace PROG2___Exercicios
                 
             }
 
-            Console.WriteLine("Congratulations!");
+            Console.WriteLine(newLine + "Congratulations! You won, wasnt this the best well spent time of your life? I know i know . . . ");
         }//end ex12()
 
         /// <summary>
