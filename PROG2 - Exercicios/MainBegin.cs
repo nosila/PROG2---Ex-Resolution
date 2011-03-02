@@ -12,7 +12,7 @@ namespace PROG2___Exercicios
         static void Main(string[] args)
         {
 
-            Exercises.ex11();
+            Exercises.Ex12();
 
         }
 

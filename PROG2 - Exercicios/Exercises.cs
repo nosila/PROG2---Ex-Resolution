@@ -321,9 +321,70 @@ namespace PROG2___Exercicios
             string input = Console.ReadLine();
 
            // byte op = Convert.ToByte(input);
-            byte op = (byte) input;
+            byte op = (byte) input[0];
             
             Console.WriteLine(newLine + op);
+        }//end ex11()
+
+        /// <summary>
+        ///  Write a program that generates a random number between 1 and 100 without revealing
+        ///it to the user. Then, the program accepts numbers form the user in an attempt to guess
+        ///the previous randomly generated number. In case the user fails to guess the number, the
+        ///program should tell him if the randomly generated number is above or below the number
+        ///he entered. Once the user correctly guesses the number, the program should provide him
+        ///with a congratulations message, show the number of attempts he tried and ask if he wants
+        ///to play the game again.
+        /// </summary>
+        public static void Ex12()
+        {
+            Random rand = new Random();
+            
+            int value = rand.Next(1, 100);
+            byte guess = 0;
+
+            
+            while(guess!= value)
+            {
+                Console.Write("Insert an integer to guess the random number between 1 and 100> ");
+
+                try
+                {
+                    guess = Convert.ToByte(Console.ReadLine());
+                    if (guess == 0) throw new OverflowException();
+                 
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine(newLine + "\tERROR: The number has to be between 1 and 100!" + newLine + newLine);
+                    continue;
+                }
+                catch(FormatException)
+                {
+                    Console.WriteLine(newLine+"\tERROR: I asked you to insert numbers not that!"+newLine+newLine);
+                    continue;
+                }
+
+                
+                
+
+                if (guess > value)
+                    Console.WriteLine(newLine + "\tThe random number is smaller than the previously inserted one! " + newLine + newLine);
+                if (guess < value)
+                    Console.WriteLine(newLine + "\tThe random number is bigger than the previously inserted one! " + newLine + newLine);
+                    
+                
+            }
+
+            Console.WriteLine("Congratulations!");
+        }//end ex12()
+
+        /// <summary>
+        ///  Write a program that reads the birthday and birth time of a person, and computes the age
+        ///of the person in years, days, and minutes.
+        /// </summary>
+        public static void Ex13()
+        {
+            Console.WriteLine("Insert ");
         }
     }
 }
