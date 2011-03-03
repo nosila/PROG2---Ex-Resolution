@@ -9,13 +9,13 @@ namespace PROG2___Exercicios
 
         private static readonly string newLine = Environment.NewLine;
 
-        public static void ex1()
+        public static void Ex1()
         {
             Console.WriteLine("Hello World");
         }
 
 
-        public static void ex2()
+        public static void Ex2()
         {
             string nome = "";
             int idade = 0;
@@ -40,23 +40,37 @@ namespace PROG2___Exercicios
             return res;
         }
 
-        public static void ex3()
+        /// <summary>
+        /// Write a program that reads a certain amount of real numbers N, determined by the user,
+        ///and prints the power of each number to the exponential Exp, also provided by the user.
+        /// </summary>
+        public static void Ex3()
         {
-            string aux;
-            int b = 0, exp = 0, res = 0;
+            int n = 0;
 
-            Console.Write("Insira a base> ");
-            b = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Insira o expoente> ");
-            exp = Convert.ToInt32(Console.ReadLine());
+            do
+            {
+                Console.Write("Insert the amount of real numbers you want to power up, at least 1> ");
+                n = Convert.ToInt32(Console.ReadLine());
+            } while (n < 1);
 
-            res = Power(b, exp);
-            Console.WriteLine("Resultado> {0}", res);
+            double b = 0, exp = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("Insert the base real number> ");
+                b = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Insert the exponential real number> ");
+                exp = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Result> {0}", Power(b, exp));
+            }
+
 
         }
 
         //CAN BE INPROVED WITH A DO WHILE!
-        public static void ex4()
+        public static void Ex4()
         {
             int menor = -1, maior = -1, aux = 0, soma = 0, k = 0;
             while (aux != -1)
@@ -95,7 +109,7 @@ namespace PROG2___Exercicios
         /// source: http://www.csharphelp.com/2011/01/using-the-stopwatch-class-in-c/
         /// </summary>
         /// <param name="op">Option of execution.</param>
-        public static void ex5(int op)
+        public static void Ex5(int op)
         {
             if (op == 1) //use DateTime
             {
@@ -122,7 +136,7 @@ namespace PROG2___Exercicios
         ///the difference in days, minutes and seconds between the dates. The method should return
         ///a value of type string.
         /// </summary>
-        public static void ex6()
+        public static void Ex6()
         {
             Console.WriteLine(dateDiff(DateTime.Now, DateTime.Now));
         }
@@ -153,7 +167,7 @@ namespace PROG2___Exercicios
         ///     2- The system will only stop receiving input after user writes 'quit'
         /// </summary>
         /// <param name="op">Option of execution.</param>
-        public static void ex7(int op)
+        public static void Ex7(int op)
         {
             if (op == 1)
             {
@@ -161,48 +175,41 @@ namespace PROG2___Exercicios
 
                 do
                 {
-                    Console.Write("Insert the number of days> ");
+                    Console.Write("Insert the number of days (number have to be bigger than 1)> ");
                     days = Console.Read();
                 } while (days < 1);
 
-                int maxDay = -1, minDay = -1;
-                double sum = 0, aux = -1, max = -1, min = -1; //4bytes vs double 8 bytes
+
+
                 bool first = false;
+                double tempInput = 0, tempSum = 0, tempLast = 0, tempMax = 0;
+                int dayMax1 = 0, dayMax2 = 0;
 
                 for (int i = 1; i <= days; i++)
                 {
                     Console.Write(newLine + "Insert a temperature> ");
-                    aux = Convert.ToDouble(Console.ReadLine());
-
-                    sum += aux;
+                    tempInput = Convert.ToDouble(Console.ReadLine());
                     if (!first)
-                    {
-                        max = aux;
-                        maxDay = i;
-                        min = aux;
-                        minDay = i;
                         first = true;
-
-                    }
                     else
                     {
-                        if (aux > max)
+                        double absTemp = abs(tempInput - tempLast);
+                        if (absTemp > tempMax)
                         {
-                            max = aux;
-                            maxDay = i;
+                            tempMax = absTemp;
+                            dayMax1 = i - 1;
+                            dayMax2 = i;
                         }
-                        else if (aux < min)
-                        {
-                            min = aux;
-                            minDay = i;
-                        }
+                        Console.WriteLine(newLine + "The temperature between the days {0} and {1} increased/decreased {2} degrees.", i - 1, i, absTemp);
                     }
+
+                    tempLast = tempInput;
 
                 }//end for
 
-                Console.WriteLine(newLine + "The average of the {0} temperatures inserted is {1} degrees.", days, sum / days);
-                Console.WriteLine("The greatest temperature variation occurred between the days {0} and {1}, with the variation temperature of {2} degrees.");
-                Console.WriteLine("The temperature between the days {0} and {1} increased/decreased {2} degrees.");
+                Console.WriteLine(newLine + "The average of the {0} temperatures inserted is {1} degrees.", days, tempSum / days);
+                Console.WriteLine("The greatest temperature variation occurred between the days {0} and {1}, with the variation temperature of {2} degrees.", dayMax1, dayMax2, tempMax);
+
             }
 
 
@@ -212,8 +219,12 @@ namespace PROG2___Exercicios
 
             }
 
-        }//end ex7()
+        }//end Ex7()
 
+        private static double abs(double n)
+        {
+            return n < 0 ? n * -1 : n;
+        }
         /// <summary>
         ///  Write a program that reads several radius of circles and computes the area and perimeter
         ///of the circle with an average of 5 decimal places. The program should stop computing once
@@ -221,7 +232,7 @@ namespace PROG2___Exercicios
         /// </summary>
         /// 
         /// //------------------>NEEDS TO BE REVISED, the math is wrong!!!
-        public static void ex8()
+        public static void Ex8()
         {
             double op = 0;
             bool first = true;
@@ -239,7 +250,7 @@ namespace PROG2___Exercicios
                 op = Convert.ToDouble(Console.ReadLine());
                 first = false;
             } while (op != 0);
-        }//end ex8
+        }//end Ex8
 
         private static double Power(double b, double exp)
         {
@@ -256,7 +267,7 @@ namespace PROG2___Exercicios
         /// Write a program that reads a none empty sequence of real numbers, terminated by 0.0,
         ///and calculates the sum and the product of all numbers with a precision of 4 decimal places.
         /// </summary>
-        public static void ex9()
+        public static void Ex9()
         {
             double input = 0, sum = 0, prod = 1;
 
@@ -278,13 +289,13 @@ namespace PROG2___Exercicios
                 Console.WriteLine(newLine + "Sum: {0}", sum);
                 Console.WriteLine("Product: {0}", prod);
             }
-        } //end ex9()
+        } //end Ex9()
 
         /// <summary>
         ///Write a program that reads an integer N and prints all the odd numbers bellow the given
         ///number.
         /// </summary>
-        public static void ex10()
+        public static void Ex10()
         {
             Console.Write("Insert an integer> ");
             int n = Convert.ToInt32(Console.ReadLine());
@@ -296,7 +307,7 @@ namespace PROG2___Exercicios
             }
 
             Console.WriteLine(newLine);
-        }//end ex10()
+        }//end Ex10()
 
         /// <summary>
         ///Write a program that presents the following options to the user.
@@ -310,7 +321,21 @@ namespace PROG2___Exercicios
         ///valid option, the program should print the message Invalid Option. The program only
         ///terminates if the option 5 is entered, otherwise the menu is showed again.
         /// </summary>
-        public static void ex11()
+        public static void Ex11()
+        {
+            showMenu();
+            string input = Console.ReadLine();
+
+            // byte op = Convert.ToByte(input);
+            byte op = (byte)input[0];
+
+            Console.WriteLine(newLine + op);
+        }//end Ex11()
+
+        /// <summary>
+        /// Show menu of Ex11()
+        /// </summary>
+        private static void showMenu()
         {
             Console.WriteLine("Choose an option: ");
             Console.WriteLine("\t1 - Start Game");
@@ -318,14 +343,7 @@ namespace PROG2___Exercicios
             Console.WriteLine("\t3 - Multiplayer Mode");
             Console.WriteLine("\t4 - Options");
             Console.WriteLine("\t5 - Exit");
-
-            string input = Console.ReadLine();
-
-            // byte op = Convert.ToByte(input);
-            byte op = (byte)input[0];
-
-            Console.WriteLine(newLine + op);
-        }//end ex11()
+        }
 
         /// <summary>
         ///  Write a program that generates a random number between 1 and 100 without revealing
@@ -378,10 +396,10 @@ namespace PROG2___Exercicios
 
             } while (guess != value);
 
-            Console.WriteLine(newLine + "Congratulations! You won after {0} tries, wasnt this the best well spent time of your life? I know i know . . . ",tries);
+            Console.WriteLine(newLine + "Congratulations! You won after {0} tries, wasnt this the best well spent time of your life? I know i know . . . ", tries);
             Console.WriteLine("Acertou ao fim de");
-        
-        }//end ex12()
+
+        }//end Ex12()
 
         /// <summary>
         ///  Write a program that reads the birthday and birth time of a person, and computes the age
