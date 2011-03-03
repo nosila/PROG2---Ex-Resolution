@@ -14,6 +14,7 @@ namespace PROG2___Exercicios
             Console.WriteLine("Hello World");
         }
 
+
         public static void ex2()
         {
             string nome = "";
@@ -75,7 +76,7 @@ namespace PROG2___Exercicios
             Console.WriteLine(newLine + "Menor> {1}", menor);
             Console.WriteLine("Maior> {0}", maior);
             Console.WriteLine("Soma> {0}", soma);
-            Console.WriteLine("Media> {0}"+ newLine, soma / k);
+            Console.WriteLine("Media> {0}" + newLine, soma / k);
         }
 
         /// <summary>
@@ -93,10 +94,10 @@ namespace PROG2___Exercicios
         /// 
         /// source: http://www.csharphelp.com/2011/01/using-the-stopwatch-class-in-c/
         /// </summary>
-       /// <param name="op">Option of execution.</param>
+        /// <param name="op">Option of execution.</param>
         public static void ex5(int op)
         {
-            if(op == 1) //use DateTime
+            if (op == 1) //use DateTime
             {
                 DateTime init = DateTime.Now;
                 int x = 0;
@@ -106,7 +107,7 @@ namespace PROG2___Exercicios
                 Console.WriteLine("Tempo decorrido> {0}" + newLine, end);
             }
 
-            if(op == 2) //use StopWatch
+            if (op == 2) //use StopWatch
             {
                 Stopwatch watch = Stopwatch.StartNew();
                 int x = 0;
@@ -154,7 +155,7 @@ namespace PROG2___Exercicios
         /// <param name="op">Option of execution.</param>
         public static void ex7(int op)
         {
-            if(op == 1)
+            if (op == 1)
             {
                 int days = 0;
 
@@ -164,28 +165,28 @@ namespace PROG2___Exercicios
                     days = Console.Read();
                 } while (days < 1);
 
-                int  maxDay = -1, minDay = -1;
-                double sum = 0, aux = -1, max = -1, min = -1 ; //4bytes vs double 8 bytes
+                int maxDay = -1, minDay = -1;
+                double sum = 0, aux = -1, max = -1, min = -1; //4bytes vs double 8 bytes
                 bool first = false;
 
-                for(int i = 1; i<=days; i++)
+                for (int i = 1; i <= days; i++)
                 {
                     Console.Write(newLine + "Insert a temperature> ");
                     aux = Convert.ToDouble(Console.ReadLine());
 
                     sum += aux;
-                    if(!first)
+                    if (!first)
                     {
                         max = aux;
                         maxDay = i;
                         min = aux;
                         minDay = i;
                         first = true;
-                        
+
                     }
                     else
                     {
-                        if(aux > max)
+                        if (aux > max)
                         {
                             max = aux;
                             maxDay = i;
@@ -199,16 +200,16 @@ namespace PROG2___Exercicios
 
                 }//end for
 
-                Console.WriteLine(newLine + "The average of the {0} temperatures inserted is {1} degrees.", days, sum/days);
+                Console.WriteLine(newLine + "The average of the {0} temperatures inserted is {1} degrees.", days, sum / days);
                 Console.WriteLine("The greatest temperature variation occurred between the days {0} and {1}, with the variation temperature of {2} degrees.");
                 Console.WriteLine("The temperature between the days {0} and {1} increased/decreased {2} degrees.");
             }
 
 
 
-            if(op == 2)
+            if (op == 2)
             {
-                
+
             }
 
         }//end ex7()
@@ -228,9 +229,9 @@ namespace PROG2___Exercicios
             do
             {
 
-                if(!first)
+                if (!first)
                 {
-                    Console.WriteLine(newLine + "Area: {0}", PI * Power(op,2));
+                    Console.WriteLine(newLine + "Area: {0}", PI * Power(op, 2));
                     Console.WriteLine("Perimeter: {0}", 2 * PI * op);
                 }
 
@@ -275,7 +276,7 @@ namespace PROG2___Exercicios
             if (sum > 0)
             {
                 Console.WriteLine(newLine + "Sum: {0}", sum);
-                Console.WriteLine("Product: {0}",prod);
+                Console.WriteLine("Product: {0}", prod);
             }
         } //end ex9()
 
@@ -287,11 +288,11 @@ namespace PROG2___Exercicios
         {
             Console.Write("Insert an integer> ");
             int n = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine(newLine + "Odd numbers bellow {0}:",n);
+            Console.WriteLine(newLine + "Odd numbers bellow {0}:", n);
 
             for (int i = n; i > 0; i--)
             {
-                if (i % 2 != 0) Console.WriteLine("{0}",i);
+                if (i % 2 != 0) Console.WriteLine("{0}", i);
             }
 
             Console.WriteLine(newLine);
@@ -320,9 +321,9 @@ namespace PROG2___Exercicios
 
             string input = Console.ReadLine();
 
-           // byte op = Convert.ToByte(input);
-            byte op = (byte) input[0];
-            
+            // byte op = Convert.ToByte(input);
+            byte op = (byte)input[0];
+
             Console.WriteLine(newLine + op);
         }//end ex11()
 
@@ -338,44 +339,48 @@ namespace PROG2___Exercicios
         public static void Ex12()
         {
             Random rand = new Random();
-            
+
             int value = rand.Next(1, 100);
             byte guess = 0;
 
-            
-            while(guess!= value)
+            int tries = 0;
+
+            do
             {
                 Console.Write("Insert an integer to guess the random number between 1 and 100> ");
 
+                //Input checking
                 try
                 {
                     guess = Convert.ToByte(Console.ReadLine());
-                    if (guess == 0) throw new OverflowException();
-                 
+                    if (guess < 1 || guess > 100) throw new OverflowException();
+
                 }
                 catch (OverflowException)
                 {
                     Console.WriteLine(newLine + "\tERROR: The number has to be between 1 and 100!" + newLine + newLine);
                     continue;
                 }
-                catch(FormatException)
+                catch (FormatException)
                 {
-                    Console.WriteLine(newLine+"\tERROR: I asked you to insert numbers not that!"+newLine+newLine);
+                    Console.WriteLine(newLine + "\tERROR: I asked you to insert a integer not that!" + newLine + newLine);
                     continue;
                 }
 
-                
-                
 
                 if (guess > value)
-                    Console.WriteLine(newLine + "\tThe random number is smaller than the previously inserted one! " + newLine + newLine);
+                    Console.WriteLine(newLine + "\tThe random number is smaller than the previously inserted one! " +
+                                      newLine + newLine);
                 if (guess < value)
-                    Console.WriteLine(newLine + "\tThe random number is bigger than the previously inserted one! " + newLine + newLine);
-                    
-                
-            }
+                    Console.WriteLine(newLine + "\tThe random number is bigger than the previously inserted one! " +
+                                      newLine + newLine);
+                tries++;
 
-            Console.WriteLine(newLine + "Congratulations! You won, wasnt this the best well spent time of your life? I know i know . . . ");
+            } while (guess != value);
+
+            Console.WriteLine(newLine + "Congratulations! You won after {0} tries, wasnt this the best well spent time of your life? I know i know . . . ",tries);
+            Console.WriteLine("Acertou ao fim de");
+        
         }//end ex12()
 
         /// <summary>
